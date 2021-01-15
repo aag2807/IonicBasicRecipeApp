@@ -1,0 +1,7 @@
+{
+  "name": "appang",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
