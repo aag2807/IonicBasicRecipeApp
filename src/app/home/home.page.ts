@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { MealdbApiService } from '../services/mealdb-api.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  meals$ = this.mealdb.meals$;
 
-  constructor() {}
+  constructor(private mealdb: MealdbApiService) {
+    this.loadData()
+  }
 
+  loadData($e?){
+    this.mealdb.getWhatToEat().pipe(take(1)).subscribe(
+      done => {
+        if($e) {
+          $e.target.complete();
+        }
+      }
+    )
+  }
 }
